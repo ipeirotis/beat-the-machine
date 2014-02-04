@@ -4,3 +4,8 @@
 *.jar
 *.war
 *.ear
+
+# generated files
+local_db.bin
+quizz-v1-java.zip
+quizz-v1-rest.discovery
