@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="com.google.appengine.eclipse.core.GAE_CONTAINER"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/objectify-4.0b3.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/commons-fileupload-1.2.1.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/guava-16.0.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/appengine-pipeline-0.2.3.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/appengine-gcs-client.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/guava-15.0.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/appengine-mapreduce-0.3.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/fastutil-6.5.12.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/json-20090211.jar"/>
+	<classpathentry kind="output" path="war/WEB-INF/classes"/>
+</classpath>

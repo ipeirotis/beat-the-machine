@@ -1,0 +1,169 @@
+{
+  "extends" : "thirdParty.api",
+  "abstract" : false,
+  "root" : "https://myapp.appspot.com/_ah/api",
+  "name" : "btm",
+  "version" : "v1",
+  "defaultVersion" : false,
+  "adapter" : {
+    "bns" : "https://myapp.appspot.com/_ah/spi",
+    "deadline" : 10.0,
+    "type" : "lily"
+  },
+  "auth" : {
+    "allowCookieAuth" : false
+  },
+  "frontendLimits" : {
+    "unregisteredUserQps" : -1,
+    "unregisteredQps" : -1,
+    "unregisteredDaily" : -1,
+    "rules" : [ ]
+  },
+  "cacheControl" : {
+    "type" : "no-cache",
+    "maxAge" : 0
+  },
+  "methods" : {
+    "btm.getClassifications" : {
+      "path" : "/getClassifications",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.btm.endpoints.ChannelEndpoint.getClassifications",
+      "request" : {
+        "parameters" : {
+          "contentId" : {
+            "type" : "string",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "btm.channelEndpoint.addChannel" : {
+      "path" : "addChannel",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.btm.endpoints.ChannelEndpoint.addChannel",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "empty"
+      }
+    }
+  },
+  "descriptor" : {
+    "schemas" : {
+      "Classification" : {
+        "id" : "Classification",
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "format" : "int64"
+          },
+          "classification" : {
+            "type" : "string"
+          },
+          "source" : {
+            "type" : "string"
+          },
+          "probability" : {
+            "type" : "number",
+            "format" : "float"
+          }
+        }
+      },
+      "ClassificationCollection" : {
+        "id" : "ClassificationCollection",
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "Classification"
+            }
+          }
+        }
+      },
+      "ChannelsWrapper" : {
+        "id" : "ChannelsWrapper",
+        "type" : "object",
+        "properties" : {
+          "entries" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "ChannelWithClassifications"
+            }
+          }
+        }
+      },
+      "ChannelWithClassifications" : {
+        "id" : "ChannelWithClassifications",
+        "type" : "object",
+        "properties" : {
+          "channel" : {
+            "$ref" : "Channel"
+          },
+          "classifications" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "Classification"
+            }
+          }
+        }
+      },
+      "Channel" : {
+        "id" : "Channel",
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string"
+          },
+          "category" : {
+            "type" : "string"
+          },
+          "contentId" : {
+            "type" : "string"
+          },
+          "contentType" : {
+            "$ref" : "ContentType"
+          },
+          "classifications" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          }
+        }
+      },
+      "ContentType" : {
+        "id" : "ContentType",
+        "type" : "string",
+        "enum" : [ "VIDEO" ]
+      }
+    },
+    "methods" : {
+      "com.btm.endpoints.ChannelEndpoint.getClassifications" : {
+        "response" : {
+          "$ref" : "ClassificationCollection"
+        }
+      },
+      "com.btm.endpoints.ChannelEndpoint.addChannel" : {
+        "request" : {
+          "$ref" : "ChannelsWrapper"
+        }
+      }
+    }
+  }
+}
