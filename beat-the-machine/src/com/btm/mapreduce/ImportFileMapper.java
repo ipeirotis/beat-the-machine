@@ -1,5 +1,6 @@
 package com.btm.mapreduce;
 
+import java.util.Arrays;
 import java.util.logging.Logger;
 
 import com.google.appengine.api.datastore.Entity;
@@ -29,8 +30,27 @@ public class ImportFileMapper extends Mapper<byte[], Void, Void> {
 
 	@Override
 	public void map(byte[] value) {
-		Entity e = new Entity("Channel");
-		e.setProperty("url", new String(value));
+		String line = new String(value);
+		String[] values = line.split(";");
+		
+		String contentId = values[0];
+		String category = values[1];
+		String contentType = values[2];
+		String url = values[3];
+		
+		String classification = values[4];
+		String source = values[5];
+		Float probability = Float.parseFloat(values[6]);
+		
+		Entity e = new Entity("Youtube", contentId);
+		e.setProperty("category", category);
+		e.setProperty("contentType", contentType);
+		e.setProperty("url", url);
+		
+		e.setProperty("classifications.classification", Arrays.asList(classification));
+		e.setProperty("classifications.source", Arrays.asList(source));
+		e.setProperty("classifications.probability", Arrays.asList(probability));
+
 		batcher.put(e);
 	}
 }

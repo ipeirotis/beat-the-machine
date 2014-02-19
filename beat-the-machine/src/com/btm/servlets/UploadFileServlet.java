@@ -36,8 +36,8 @@ public class UploadFileServlet extends HttpServlet {
 
 		for(BlobKey blobKey : blobKeys){
 	        mapreduce(blobKey.getKeyString(), 5, 5);
-	        res.getWriter().print("done");
 		}
+        res.getWriter().print("done");
 	}
 
 	private String mapreduce(String blobKey, int mapShardCount, int reduceShardCount) {
@@ -53,7 +53,9 @@ public class UploadFileServlet extends HttpServlet {
 	}
 
 	private MapReduceSettings getSettings() {
-		MapReduceSettings settings = new MapReduceSettings().setWorkerQueueName("mapreduce-workers");
+		MapReduceSettings settings = new MapReduceSettings();
+		settings.setWorkerQueueName("mapreduce-workers");
+		settings.setBucketName("mreduce");
 		return settings;
 	}
 

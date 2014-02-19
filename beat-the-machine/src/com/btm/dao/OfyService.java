@@ -1,15 +1,13 @@
 package com.btm.dao;
 
-import com.btm.entity.Classification;
-import com.btm.entity.Channel;
+import com.btm.entity.Youtube;
 import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyFactory;
 import com.googlecode.objectify.ObjectifyService;
 
 public class OfyService {
 	static {
-		register(Classification.class);
-        register(Channel.class);
+        register(Youtube.class);
     }
 
     public static Objectify ofy() {
